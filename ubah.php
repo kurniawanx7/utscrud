@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!$_SESSION["login"]) {
+    header("Location: login.php");
+    exit;
+}
+
 require 'function.php';
 
 //ambil data di URL
@@ -40,39 +47,117 @@ if (isset($_POST["submit"])) {
     <title>Ubah Data Mahasiswa</title>
 </head>
 
+<style>
+     legend {
+          color: white;
+          padding: 5px;
+          background: #3f729b;
+          border-radius: 5px;
+     }
+
+
+     label {
+          float: left;
+          color: black;
+          padding: 5px;
+     }
+
+     input {
+          border-width: 5px;
+          border-color:red;
+          border-radius: 10px;
+          height: 30px;
+     }
+
+     button {
+          background: Red;
+
+     }
+
+
+     .footer {
+          width: 100%;
+          height: 50px;
+          padding-left: 0px;
+          padding-right: 0px;
+          line-height: 50px;
+          background-color: #3f729b;
+          position: absolute;
+          bottom: 0px;
+          right: 0px;
+     }
+
+     .social-media-button {
+          border: none;
+          color: #FFFFFF;
+          /* WHITE */
+          font-size: 16px;
+          padding: 0.5em 1em;
+     }
+
+
+     .social-media-button.instagram {
+          background: red;
+     }
+
+    html{
+        background-image: url("img/bg1.jpg");
+    }
+</style>
+
 <body>
 
-    <h1>Ubah Data Mahasiswa</h1>
+    <legend><h1>Ubah Data Mahasiswa</h1></legend>
 
-    <form action="" method="POST">
-        <input type="hidden" name="id" value="<?= $mhs["id"] ?>">
-        <ul>
-            <li>
-                <label for="nama"> NAMA : </label>
-                <input type="text" name="nama" id="nama" required value="<?= $mhs["nama"] ?>">
-            </li>
-            <li>
-                <label for="npm"> NPM : </label>
-                <input type="text" name="npm" id="npm" required value="<?= $mhs["npm"] ?>">
-            </li>
-            <li>
-                <label for="jurusan"> JURUSAN : </label>
-                <input type="text" name="jurusan" id="jurusan" required value="<?= $mhs["jurusan"] ?>">
-            </li>
-            <li>
-                <label for="email"> EMAIL : </label>
-                <input type="text" name="email" id="email" required value="<?= $mhs["email"] ?>">
-            </li>
-            <li>
-                <label for="gambar"> PHOTO : </label>
-                <input type="text" name="gambar" id="gambar" required value="<?= $mhs["gambar"] ?>">
-            </li>
-            <li>
-                <button type="submit" name="submit">Ubah Data</button>
-            </li>
-        </ul>
+    <form action="" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $mhs["id"] ?>">
+                    <input type="hidden" name="gambarlama" value="<?= $mhs["gambar"] ?>">
+                    <ul>
+                         <p>
+                              <label for="nama" style="margin-right: 25px;">
+                                   NAMA : </label>
+                              <input type="text" name="nama" id="nama" required value="<?= $mhs["nama"] ?>">
+                         </p>
+
+                         <p>
+                              <label for="npm" style="margin-right: 39px;">
+                                   NPM : </label>
+                              <input type="text" name="npm" id="npm" required value="<?= $mhs["npm"] ?>">
+                         </p>
+
+                         <p>
+                              <label for="jurusan" style="margin-right: 1px;">
+                                   JURUSAN : </label>
+                              <input type="text" name="jurusan" id="jurusan" required value="<?= $mhs["jurusan"] ?>">
+                         </p>
+
+                         <p>
+                              <label for="email" style="margin-right: 25px;">
+                                   EMAIL : </label>
+                              <input type="text" name="email" id="email" required value="<?= $mhs["email"] ?>">
+                         </p>
+
+                         <p>
+                              <label for="gambar" style="margin-right: 23px;">
+                                   PHOTO : </label>
+                                   <img src="img/<?= $mhs["gambar"] ?>" width="40">
+                              <input type="file" name="gambar" id="gambar" required value="<?= $mhs["gambar"] ?>">
+                         </p>
+
+                         <p>
+                              <button type="submit" name="submit">Ubah Data</button>
+                         </p>
+                    </ul>
 
     </form>
+
+    <div class="footer">
+          <h10 style="color:white;"> Copyright||Kurniawan
+          <div style="float:left">&copy; <?php echo date("Y"); ?> </div> </h10>
+          <div style="float:right">
+               <a href="https://www.instagram.com/wannn_x7/"><button type="button"
+                         class="social-media-button icon instagram">my instagram</button> </a>
+          </div>
 
 </body>
 
